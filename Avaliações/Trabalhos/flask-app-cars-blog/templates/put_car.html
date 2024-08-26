@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Editar carro</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        {% include 'global_css.html' %}
+        {% include 'header.html' %}
+
+        <main>
+            <a class="put-car-cancel" href="{{url_for("dashboard")}}">
+                ⬅️ Voltar para a listagem
+            </a>
+            
+            <h2 class="put-car-title"> Edite seu carro!</h2>
+            <form class="put-car-form" action="{{url_for("put_car")}}" method="POST">
+                <input type="text" name="added_by_user_id" value="{{car.get("added_by_user_id")}}" hidden/>
+                <input type="text" name="car_id" value="{{car.get("id")}}" hidden>
+                <input class="put-car-component" type="text" name="name" placeholder="{{car.get("name")}}">
+                <input class="put-car-component" type="number" name="value" placeholder="{{car.get("value")}}">
+                <input class="put-car-component" type="text" name="color" placeholder="{{car.get("color")}}">
+                <input class="put-car-component" type="number" name="max_speed" placeholder="{{car.get("max_speed")}}">
+                <input class="put-car-component" type="text" name="image_url" placeholder="{{car.get("image_url")}}">
+                <select class="put-car-component" name="country_id">
+                    <option value="" hidden>Selecione o país de origem do carro</option>
+                    {% for item in countries: %}
+                        <option value="{{item.get("id")}}" {% if car.get("country_id") == item.get("id") %}selected{% endif %}>{{item.get("name")}}</option>
+                    {% endfor %}
+                </select>
+                <input class="put-car-component submit" type="submit" value="Salvar">
+            </form>
+        </main>
+    </body>
+    <style>
+        main{
+            width: 100vw;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .put-car-cancel{
+            position: absolute;
+            top: 3rem;
+            right: 3rem;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .put-car-title{
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 400;
+        }
+
+        .put-car-form{
+            margin: 0 auto;
+            height: fit-content;
+            margin-top: 2rem;
+            width: 30vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            border: 0.05rem solid var(--secondary-color);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0px 4px 8px rgba(255, 152, 0, 0.3), 0px 8px 16px rgba(255, 152, 0, 0.2);
+        }
+
+        .put-car-component {
+            color: var(--primary-bg);
+            height: 2.8rem;
+            border: 0;
+            outline: none;
+            border-radius: 0.2rem;
+            padding: 0 0.4rem;
+            width: 100%;
+        }
+
+        .put-car-submit-container{
+            display: flex;
+            width: 100%;
+            outline: none;
+            border: 0;
+            gap: 1rem;
+        }
+
+        .put-car-component.submit{
+            background: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+    </style>
+    </script>
+</html>

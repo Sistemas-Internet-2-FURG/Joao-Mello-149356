@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>HOME</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        {% include 'global_css.html' %}
+        {% include 'header.html' %}
+        <main>
+            {% if name %}
+                <a class="add-car" href="{{url_for("add_car")}}">
+                    Adicionar carro
+                </a>
+            {% endif %}
+            
+            <h2 class="title">Busque por carros aqui 👇🏾</h2>
+            <form action="{{url_for("filter_cars")}}" method="POST" >
+                <input class="filter-component" type="text" name="filter" {% if filter %}value={{filter}}{% endif %} placeholder="Insira o filtro">
+                <select class="filter-component" name="filter_type">
+                    <option value="name" {% if filter_type == 'name' %}selected{% endif %}>Nome</option>
+                    <option value="country" {% if filter_type == 'country' %}selected{% endif %}>País</option>
+                </select>
+                <input class="filter-component submit" type="submit" value="Filtrar">
+            </form>
+            
+            <div class="cars-grid">
+                {% for item in data: %}
+                    <div class="car-card">
+                        <img class="country-image" src="{{item.get("flag_url")}}" alt="Flag from country origin of {{item.get("name")}} car">
+                        <img class="car-image" src="{{item.get("image_url")}}" alt="Image of a {{item.get("name")}}">
+                        <section class="car-info-container">
+                            <div class="car-info">
+                                <span class="car-name">{{item.get("name")}}</span>
+                                <div>
+                                    <span>{{item.get("value")}}</span>
+                                    <span> | </span>
+                                    <span>{{item.get("color")}}</span>
+                                </div>
+                                <span>{{item.get("max_speed")}} km/h</span>
+                                <span class="car-added-user-container">Adicionado por <span class="car-added-user">{{item.get("added_by_user_name")}}</span></span>
+                            </div>
+                            <div class="car-actions">
+                                {% if session_id and item.get("added_by_user_id") == session_id %}
+                                    <form action="{{url_for("put_car")}}" method="POST">
+                                        <input type="text" name="added_by_user_id" value="{{item.get("added_by_user_id")}}" hidden/>
+                                        <input type="text" name="car_id" value="{{item.get("id")}}" hidden/>
+                                        <input class="car-button submit edit" type="submit" value="Editar"/>
+                                    </form>
+                                    <form action="{{url_for("delete_car")}}" method="POST">
+                                        <input type="text" name="added_by_user_id" value="{{item.get("added_by_user_id")}}" hidden/>
+                                        <input type="text" name="car_id" value="{{item.get("id")}}" hidden/>
+                                        <input class="car-button submit" type="submit" value="Excluir"/>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </section>
+                    </div>
+                {% endfor %}
+            </div>
+        </main>
+    </body>
+    <style>
+        .add-car{
+            position: absolute;
+            top: 1.4rem;
+            right: 1.4rem;
+            text-decoration: none;
+            background: var(--link-color);
+            color: var(--secondary-bg);
+            padding: 0.5rem 0.7rem;
+            border-radius: 0.3rem;
+            font-size: 1.1rem;
+        }
+
+        .title{
+            margin-top: -1rem;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .filter-component {
+            color: var(--primary-bg);
+            height: 2rem;
+            border: 0;
+            outline: none;
+            border-radius: 0.2rem;
+            padding: 0 0.4rem;
+            min-width: 5rem;
+        }
+
+        .filter-component + .filter-component{
+            margin-left: 0.4rem;
+        }
+
+        .filter-component.submit{
+            background: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .cars-grid{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .car-card{
+            height: 20rem;
+            width: calc((100vw - 8rem - 4rem) / 3);
+            background: var(--primary-bg);
+            display: flex;
+            border: 0.05rem solid var(--secondary-color);
+            border-radius: 0.4rem;
+            box-shadow: 0px 4px 8px rgba(255, 152, 0, 0.3), 0px 8px 16px rgba(255, 152, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .country-image{
+            position: absolute;
+            height: 1.2rem;
+            border-radius: 0.3rem;
+            top: 0.4rem;
+            right: 0.4rem;
+        }
+
+        .car-image{
+            width: 100%;
+            height: 10rem;
+            object-fit: cover; /* Or 'contain' depending on your needs */
+            border-radius: 0.4rem 0.4rem 0 0;
+        }
+
+        .car-info-container{
+            display: flex;
+            flex: 1;
+        }
+        
+        .car-info{
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            width: 70%;
+        }
+
+        .car-name{
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .car-added-user-container{
+            margin-top: auto;
+            font-size: 0.8rem;
+        }
+
+        .car-added-user{
+            font-style: italic;
+        }
+
+        .car-actions{
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.6rem;
+            flex: 1;
+        }
+
+        .car-button{
+            height: 1.6rem;
+            width: 4rem;
+            border-radius: 0.2rem;
+            border: 0;
+            color: var(--secondary-bg);
+        }
+
+        .car-button.edit{
+            background: var(--secondary-color);
+        }
+    </style>
+</html>

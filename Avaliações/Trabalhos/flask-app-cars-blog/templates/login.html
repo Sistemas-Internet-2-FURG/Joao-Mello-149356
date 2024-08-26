@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Login</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        {% include 'global_css.html' %}
+        <main>
+            <h2 class="login-title">Faça seu login</h2>
+            <form class="login-form" action="{{url_for("login")}}" method="POST">
+                <input class="login-component" type="text" name="name" required placeholder="Insira seu nome">
+                <input class="login-component" type="text" name="email" required placeholder="Insira seu e-mail">
+                <input class="login-component submit" type="submit" value="Entrar">
+            </form>
+        </main>
+    </body>
+    <style>
+        main{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-title{
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 400;
+            margin-top: 3rem;
+        }
+
+        .login-form{
+            margin: 0 auto;
+            height: fit-content;
+            margin-top: 2rem;
+            width: 30vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            border: 0.05rem solid var(--secondary-color);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0px 4px 8px rgba(255, 152, 0, 0.3), 0px 8px 16px rgba(255, 152, 0, 0.2);
+        }
+
+        .login-component {
+            color: var(--primary-bg);
+            height: 2.8rem;
+            border: 0;
+            outline: none;
+            border-radius: 0.2rem;
+            padding: 0 0.4rem;
+            width: 100%;
+        }
+
+        .login-component.submit{
+            background: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+    </style>
+</html>
