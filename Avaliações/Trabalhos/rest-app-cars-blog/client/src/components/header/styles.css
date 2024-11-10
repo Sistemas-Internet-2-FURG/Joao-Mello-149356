@@ -1,0 +1,30 @@
+.header{
+    background: var(--primary-bg);
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4rem;
+}
+
+.side-info{
+    display: flex;
+    align-items: center;
+}
+
+.header-title{
+    color: var(--text-color);
+    font-size: 1.1rem;
+    margin-right: 2rem;
+}
+
+.header-title-nav{
+    color: var(--secondary-color);
+}
+
+.logout{
+    display: flex;
+    gap: 1rem;
+    cursor: pointer;
+}

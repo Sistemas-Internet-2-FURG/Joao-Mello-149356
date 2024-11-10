@@ -1,0 +1,17 @@
+services:
+  postgres:
+    container_name: autos-postgres
+    image: postgres:14-alpine
+    mem_limit: 500m
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: autos
+      POSTGRES_PASSWORD: autos-pass
+      POSTGRES_USER: autos-user
+      PGUSER: autos
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 1s
+      timeout: 3s
+      retries: 30

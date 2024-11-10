@@ -1,0 +1,122 @@
+.add-car{
+    position: absolute;
+    top: 1.4rem;
+    right: 1.4rem;
+    text-decoration: none;
+    background: var(--link-color);
+    color: var(--secondary-bg);
+    padding: 0.5rem 0.7rem;
+    border-radius: 0.3rem;
+    font-size: 1.1rem;
+    border: 0;
+}
+
+.title{
+    margin-top: -1rem;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.filter-component {
+    color: var(--primary-bg);
+    height: 2rem;
+    border: 0;
+    outline: none;
+    border-radius: 0.2rem;
+    padding: 0 0.4rem;
+    min-width: 5rem;
+}
+
+.filter-component + .filter-component{
+    margin-left: 0.4rem;
+}
+
+.filter-component.submit{
+    background: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+.cars-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.car-card{
+    height: 20rem;
+    width: calc((100vw - 8rem - 4rem) / 3);
+    background: var(--primary-bg);
+    display: flex;
+    border: 0.05rem solid var(--secondary-color);
+    border-radius: 0.4rem;
+    box-shadow: 0px 4px 8px rgba(255, 152, 0, 0.3), 0px 8px 16px rgba(255, 152, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.country-image{
+    position: absolute;
+    height: 1.2rem;
+    border-radius: 0.3rem;
+    top: 0.4rem;
+    right: 0.4rem;
+}
+
+.car-image{
+    width: 100%;
+    height: 10rem;
+    object-fit: cover; /* Or 'contain' depending on your needs */
+    border-radius: 0.4rem 0.4rem 0 0;
+}
+
+.car-info-container{
+    display: flex;
+    flex: 1;
+}
+
+.car-info{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    width: 70%;
+}
+
+.car-name{
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+
+.car-added-user-container{
+    margin-top: auto;
+    font-size: 0.8rem;
+}
+
+.car-added-user{
+    font-style: italic;
+}
+
+.car-actions{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.6rem;
+    flex: 1;
+}
+
+.car-button{
+    height: 1.6rem;
+    width: 4rem;
+    border-radius: 0.2rem;
+    border: 0;
+    color: var(--secondary-bg);
+}
+
+.car-button.edit{
+    background: var(--secondary-color);
+}
