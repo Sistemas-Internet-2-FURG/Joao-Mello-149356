@@ -35,7 +35,7 @@ export function Dashboard() {
 
     useEffect(() => {
         async function getCars(){
-            const { data } = await axios.get<unknown, CarResponse>('http://localhost:8080/car');
+            const { data } = await axios.get<unknown, CarResponse>('http://localhost:8080/car', { withCredentials: true });
             setCars(data);
         }
 
@@ -61,6 +61,7 @@ export function Dashboard() {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem("@token")}`, // Add Bearer token if required
             },
+            withCredentials: true,
         });
 
         window.location.reload();
@@ -78,6 +79,7 @@ export function Dashboard() {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem("@token")}`, // Add Bearer token if required
             },
+            withCredentials: true,
         });
         setCars(data);
     }

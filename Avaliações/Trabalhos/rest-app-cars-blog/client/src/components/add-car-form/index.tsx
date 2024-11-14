@@ -27,10 +27,9 @@ export function AddCarForm() {
 
     useEffect(() => {
         async function getCountries(){
-            const { data } = await axios.get<unknown, CountryResponse>('http://localhost:8080/country');
+            const { data } = await axios.get<unknown, CountryResponse>('http://localhost:8080/country', { withCredentials: true });
             setCountries(data);
         }
-
         getCountries();
     }, []);
 
@@ -57,6 +56,7 @@ export function AddCarForm() {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem("@token")}` // Include Bearer token if needed
                 },
+                withCredentials: true,
             });
             navigateTo('/'); // Redirect to dashboard or another page
         } catch {

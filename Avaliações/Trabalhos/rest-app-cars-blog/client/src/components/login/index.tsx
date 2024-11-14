@@ -31,7 +31,7 @@ export function Login() {
             email: femail,
         }
 
-        const { data: { id, name, email, token }} = await axios.post<unknown, LoginResponse>('http://localhost:8080/login', payload);
+        const { data: { id, name, email, token }} = await axios.post<unknown, LoginResponse>('http://localhost:8080/login', payload, { withCredentials: true });
         localStorage.setItem("@token", token);
         localStorage.setItem("@name", name);
         localStorage.setItem("@email", email);
