@@ -1,3 +1,6 @@
+# Vídeo da apresentação
+Para ver o vídeo, acesse pelo [youtube](https://youtu.be/02yyWXTjewk)
+
 # Como rodar?
 - Para o client: `cd client && npm i && npm run dev`
 - Para o server: `cd api && pip install -r requirements.txt && docker compose up -d && python main.py`
