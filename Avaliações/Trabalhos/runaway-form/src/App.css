@@ -1,0 +1,20 @@
+form {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+div {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+button {
+  width: 200px;
+}
