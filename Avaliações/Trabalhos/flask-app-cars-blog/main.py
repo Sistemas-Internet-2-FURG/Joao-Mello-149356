@@ -98,7 +98,7 @@ def put_car():
         request.form.get('max_speed') or car.get('max_speed'),
         request.form.get('image_url') or car.get('image_url'),
         request.form.get('country_id') or car.get('country_id'),
-        session.get("session_id")
+        request.form.get('country_id') or car.get('country_id'),
     )
 
     return redirect(url_for("dashboard"))
